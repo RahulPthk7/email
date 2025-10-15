@@ -57,7 +57,7 @@ export function startForAccount(cfg) {
           size: 1,
           sort: [{ uid: { order: "desc" } }],
           query: {
-            bool: { must: [{ term: { account } }, { term: { folder } }] },
+            bool: { must: [{ match: { "account.keyword": account } }, { match: { "folder.keyword": folder } }] },
           },
         },
       });
@@ -123,8 +123,8 @@ export function startForAccount(cfg) {
               query: {
                 bool: {
                   must: [
-                    { term: { "account.keyword": doc.account } },
-                    { term: { "folder.keyword": doc.folder } },
+                    { match: { "account.keyword": doc.account } },
+                    { match: { "folder.keyword": doc.folder } },
                     { term: { uid: doc.uid } }
                   ]
                 }
